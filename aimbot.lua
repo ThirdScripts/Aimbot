@@ -1,5 +1,5 @@
 local predictionFactor = 0.042  -- Чувствительность предсказания
-local aimSpeed = 7  -- Скорость наводки
+local aimSpeed = 10  -- Скорость наводки
 local fovRadius = 200  -- Радиус FOV
 local camera = game:GetService("Workspace").CurrentCamera
 local players = game:GetService("Players")
