@@ -5,6 +5,7 @@ local camera = game:GetService("Workspace").CurrentCamera
 local players = game:GetService("Players")
 local user = players.LocalPlayer  -- LocalPlayer работает только на клиенте
 local holding = false
+local aimBotEnabled = true -- Переменная для включения/выключения аимбота
 
 -- Проверка, существует ли игрок в игре
 if not user then
@@ -62,6 +63,12 @@ FOVCircle.Thickness = 1
 game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 then
         holding = true
+    elseif input.KeyCode == Enum.KeyCode.T then
+        aimBotEnabled = not aimBotEnabled
+        FOVCircle.Visible = aimBotEnabled
+        if not aimBotEnabled then
+            holding = false
+        end
     end
 end)
 
@@ -73,6 +80,8 @@ end)
 
 -- Основной цикл
 game:GetService("RunService").RenderStepped:Connect(function()
+    if not aimBotEnabled then return end
+
     FOVCircle.Position = game:GetService("UserInputService"):GetMouseLocation()
 
     if holding then
